@@ -11,15 +11,6 @@
                <img alt="Vue logo" :src="require(`@/assets/images/avatar/pastry${item}.jpg`)">
             </div>
         </CarouselItem>
-        <!-- <CarouselItem>
-            <div class="demo-carousel">2</div>
-        </CarouselItem>
-        <CarouselItem>
-            <div class="demo-carousel">3</div>
-        </CarouselItem>
-        <CarouselItem>
-            <div class="demo-carousel">4</div>
-        </CarouselItem> -->
     </Carousel>
     </div>
     <hr>
