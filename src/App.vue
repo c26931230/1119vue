@@ -1,9 +1,15 @@
 <template>
+<header>
   <nav>
     <router-link to="/">Home</router-link> |
-    <router-link to="/about">About</router-link>
+    <router-link to="/about">About </router-link>|
+    <router-link to="/news">News </router-link>|
+    <router-link to="/product">product </router-link>
   </nav>
-  <router-view/>
+
+</header>
+<router-view/>
+<footer>footer</footer>
 </template>
 
 <style lang="scss">
@@ -14,10 +20,18 @@
   text-align: center;
   color: #2c3e50;
 }
+header{
+  color: #2c3e50;
+  background: #3159b0;
+}
+footer{
+  background: #42b962;
+  padding: 20px;
+  margin-top: 100px;
+}
 
 nav {
   padding: 30px;
-
   a {
     font-weight: bold;
     color: #2c3e50;

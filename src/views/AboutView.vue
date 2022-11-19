@@ -1,5 +1,89 @@
 <template>
   <div class="about">
     <h1>This is an about page</h1>
+    <Button type="primary">Primary</Button>
+    <hr>
+    <div>
+      
+      <Carousel v-model="value" loop>
+        <CarouselItem v-for="item in 4" :key=item>
+            <div class="demo-carousel">
+               <img alt="Vue logo" :src="require(`@/assets/images/avatar/pastry${item}.jpg`)">
+            </div>
+        </CarouselItem>
+        <!-- <CarouselItem>
+            <div class="demo-carousel">2</div>
+        </CarouselItem>
+        <CarouselItem>
+            <div class="demo-carousel">3</div>
+        </CarouselItem>
+        <CarouselItem>
+            <div class="demo-carousel">4</div>
+        </CarouselItem> -->
+    </Carousel>
+    </div>
+    <hr>
+     <Space wrap>
+        <Circle :percent="80">
+            <span class="demo-Circle-inner" style="font-size:24px">80%</span>
+        </Circle>
+        <Circle :percent="100" stroke-color="#5cb85c">
+            <Icon type="ios-checkmark" size="60" style="color:#5cb85c"></Icon>
+        </Circle>
+        <Circle :percent="35" stroke-color="#ff5500">
+            <span class="demo-Circle-inner">
+                <Icon type="ios-close" size="50" style="color:#ff5500"></Icon>
+            </span>
+        </Circle>
+    </Space>
+    <hr>
+     <Menu active-name="1-2" :open-names="['1']">
+        <Submenu name="1">
+            <template #title>
+                <Icon type="ios-analytics" />
+                Navigation One
+            </template>
+            <MenuGroup title="Item 1">
+                <MenuItem name="1-1">Option 1</MenuItem>
+                <MenuItem name="1-2">Option 2</MenuItem>
+            </MenuGroup>
+            <MenuGroup title="Item 2">
+                <MenuItem name="1-3">Option 3</MenuItem>
+                <MenuItem name="1-4">Option 4</MenuItem>
+            </MenuGroup>
+        </Submenu>
+        <Submenu name="2">
+            <template #title>
+                <Icon type="ios-filing" />
+                Navigation Two
+            </template>
+            <MenuItem name="2-1">Option 5</MenuItem>
+            <MenuItem name="2-2">Option 6</MenuItem>
+            <Submenu name="3">
+                <template #title>Submenu</template>
+                <MenuItem name="3-1">Option 7</MenuItem>
+                <MenuItem name="3-2">Option 8</MenuItem>
+            </Submenu>
+        </Submenu>
+        <Submenu name="4">
+            <template #title>
+                <Icon type="ios-cog" />
+                Navigation Three
+            </template>
+            <MenuItem name="4-1">Option 9</MenuItem>
+            <MenuItem name="4-2">Option 10</MenuItem>
+            <MenuItem name="4-3">Option 11</MenuItem>
+            <MenuItem name="4-4">Option 12</MenuItem>
+        </Submenu>
+    </Menu>
   </div>
 </template>
+<script>
+    export default {
+        data () {
+            return {
+                value: 0
+            }
+        }
+    }
+</script>
