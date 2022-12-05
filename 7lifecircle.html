@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>生命週期</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        *{
+            box-sizing: border-box;
+        }
+        .wrapper{
+            display: flex;
+            flex-wrap: wrap;
+        }
+        main{
+            width: 85%;
+            border: 1px #aaa solid;
+            /* overflow: scroll; */
+        }
+        aside{
+            width: 15%;
+            border: 1px #aaa solid;
+        }
+        img{
+            height: 5rem;
+        }
+        .productContainer{
+            display: flex;
+            flex-wrap: wrap;
+        }
+        .item{
+            width: 25%;
+            border: 1px #ddd solid;
+        }
+    </style>
+</head>
+
+<body>
+    <a href="index.html">index</a>
+    <div id="app">
+    
+        <div class="wrapper">
+            <main>
+                <header>
+                    search: <input type="text" v-model="search"><br>
+                    <!-- {{search}} -->
+                    $<input type="number" v-model="min">-<input type="number" v-model="max">
+                </header>
+                <template v-if="load">loading...</template>
+                <div v-else class="productContainer">
+                    <div v-for="(item, index) in product" :key="item.id" class="item">
+                        <p>{{item.title}}</p>
+                        <img :src="item.image" v-bind:alt="item.title">
+                        <p>{{parsePrice(item.price)}}元</p>
+                        <div>
+                            <button v-on:click="reduceCount(index, item)">-</button>
+                            <input type="number" min="0" v-model="count[index]">
+                            <button @click="addCount(index, item)">+</button>
+                        </div>
+                    </div>
+                </div>
+            </main>
+            <aside>
+                訂單
+                <ul>
+                    <li v-for="item in order" :key="item.id">
+                        ID:{{item.id}}: {{item.count}}
+                    </li>
+                </ul>
+                {{order}}
+                <p>總計：{{total}}元</p>
+            </aside>
+        </div>
+    </div>
+    <script src="https://unpkg.com/vue@next"></script>
+    <script>
+        Vue.createApp({
+            data() {
+                return {
+                    load: false,
+                    source: [],
+                    // product: [],
+                    count: [],
+                    // total: 0,
+                    search: '',
+                    min: 0,
+                    max: 0,
+                    order: [],
+                    sourceCount: 0,
+                }
+            },
+            computed: {
+                product() {
+                    let cache = this.source
+                    if (this.min > 0) {//篩選最小價錢
+                        cache = cache.filter((item, index) => {
+                            return item.price > this.min
+                        })
+                    }
+                    if (this.max > 0) {//篩選最大價錢
+                        cache = cache.filter(item => {
+                            return item.price < this.max
+                        })
+                    }
+                    if (this.search !== '') {//篩選相符標題
+                        cache = cache.filter(item => {
+                            return item.title.includes(this.search)
+                        })
+                    }
+                    return cache
+                },
+                total() {
+                    let total = 0
+                    for (const countIndex in this.product) {
+                        total += this.count[countIndex] * this.product[countIndex]['price']
+                    }
+                    return parseInt(total)
+                }
+            },
+            watch: {
+                //監聽data或computed
+                total: {
+                    handler: function (newVal, oldVal) {
+                        if (newVal > 1000) {
+                            alert('你要餓死了')
+                        }
+                    }
+                }
+            },
+            methods: {
+                parsePrice(price) {
+                    return `TWD ${price * 33}`
+                },
+                getResource() {
+                    this.load = true
+                    fetch('https://fakestoreapi.com/products/')
+                        .then(res => res.json())
+                        .then(json => {
+                            this.source = json
+                            //初始化商品數量
+                            for (item in this.product) {
+                                this.count.push(0)
+                            }
+                            this.load = false
+                            console.log('method' + this.source.length);
+                        })
+
+                },
+                addCount(index, item) {
+                    this.count[index] += 1
+                    this.order.find()
+                    this.order.push({
+                        id: item.id,
+                        title: item.title,
+                        price: item.price,
+                        count:1
+                    })
+                },
+                reduceCount(index, item) {
+                    if (this.count[index] <= 0) return
+                    this.count[index] -= 1
+                    // this.order.splice(index,1)
+                
+                },
+              
+
+            },
+            created() { //created: Vue實體被建立完
+                this.getResource()
+                console.log('created' + this.source.length);
+            },
+            mounted() {
+                console.log('mounted' + this.source.length);
+            },
+            beforeUnmount() {
+                alert('beforeUnmount')
+                console.log('beforeUnmount');
+            },
+
+
+
+        }).mount("#app")
+    </script>
+</body>
+
+</html>
+<style>
+    .productContainer {
+        display: inline-flex;
+    }
+
+    img {
+        height: 5rem;
+    }
+</style>

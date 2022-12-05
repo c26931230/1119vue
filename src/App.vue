@@ -1,44 +1,47 @@
 <template>
 <header>
   <nav>
-    <router-link to="/">Home</router-link> |
+    <!-- <router-link to="/">Home</router-link> |
     <router-link to="/about">About </router-link>|
-    <router-link to="/news">News </router-link>|
-    <router-link to="/product">product </router-link>
+    <router-link to="/news">News </router-link>| -->
+    <!-- <router-link to="/product">product </router-link> -->
+    <!-- <router-link to="/front_end">前台 </router-link>-->
+    <router-link to="/back_end">後台 </router-link>
+    <router-link to="/front_end">前台 </router-link>
   </nav>
 
 </header>
 <router-view/>
-<footer>footer</footer>
+<!-- <footer>footer</footer> -->
 </template>
 
-<style lang="scss">
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-}
-header{
-  color: #2c3e50;
-  background: #3159b0;
-}
-footer{
-  background: #42b962;
-  padding: 20px;
-  margin-top: 100px;
-}
+ <style lang="scss">
+// #app {
+//   font-family: Avenir, Helvetica, Arial, sans-serif;
+//   -webkit-font-smoothing: antialiased;
+//   -moz-osx-font-smoothing: grayscale;
+//   text-align: center;
+//   color: #2c3e50;
+// }
+// header{
+//   color: #2c3e50;
+//   background: #3159b0;
+// }
+// footer{
+//   background: #42b962;
+//   padding: 20px;
+//   margin-top: 100px;
+// }
 
-nav {
-  padding: 30px;
-  a {
-    font-weight: bold;
-    color: #2c3e50;
+// nav {
+//   padding: 30px;
+//   a {
+//     font-weight: bold;
+//     color: #2c3e50;
 
-    &.router-link-exact-active {
-      color: #42b983;
-    }
-  }
-}
-</style>
+//     &.router-link-exact-active {
+//       color: #42b983;
+//     }
+//   }
+// }
+// </style>
